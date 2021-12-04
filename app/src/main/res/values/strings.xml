@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LAK升旗仪式模拟器</string>
+    <string name="title_00">升</string>
+    <string name="title_01">旗</string>
+    <string name="title_02">仪式模拟器</string>
+    <string name="author">作者：wfrfred</string>
+    <string name="acknowledgement_00">特别鸣谢:\n皮皮卡丘桑&amp;超威蓝猫_吗&amp;Y^3&amp;鸽子</string>
+    <string name="acknowledgement_01">LAK</string>
+    <string name="acknowledgement_02">提供的素材与思路</string>
+</resources>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp">
+
+            <LinearLayout
+                android:id="@+id/sky"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:background="#98DDDF"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:paddingStart="50dp"
+                android:paddingTop="100dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.wfrfred.flagraisingceremonysimulator.core.Flag.FlagTop
+                        android:layout_width="15dp"
+                        android:layout_height="15dp" />
+
+                    <com.wfrfred.flagraisingceremonysimulator.core.Flag.FlagPlot
+                        android:id="@+id/flagPlot"
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/flag_container"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:background="#00FFFFFF"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/flag"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="#ff0000" />
+
+                    <View
+                        android:id="@+id/below_flag"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lak_head_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <com.wfrfred.flagraisingceremonysimulator.core.Lak.Lak
+                        android:id="@+id/lak_head"
+                        android:layout_width="40dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center" />
+
+                    <View
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:background="#514129" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:background="#B3843A"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/prompt"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:background="#FFBCBC" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lecture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="#83000000"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <com.wfrfred.flagraisingceremonysimulator.core.Lak.LakLecture
+                    android:id="@+id/lak"
+                    android:layout_width="142dp"
+                    android:layout_height="230dp"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#C1F8FF"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

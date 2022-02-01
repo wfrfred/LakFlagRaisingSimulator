@@ -13,9 +13,9 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 public class FlagPlot extends View {
+    private final boolean isInit = false;
     private Paint paint;
     private RectF mRect;
-    private final boolean isInit = false;
 
     public FlagPlot(Context context) {
         super(context);

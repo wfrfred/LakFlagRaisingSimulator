@@ -18,17 +18,39 @@ public class RaisingMission extends Mission {
     private final View belowFlag;
     private final View slideView;
     private final TextView prompt;
+    private final double HEIGHT;
+    private final double WIDTH;
     private MediaPlayer bgm;
     private Timer timer = new Timer();
-
     private double posX, posY, curPosX, curPosY;
     private boolean isRaising = false;
     private double currentHeight;
+    View.OnTouchListener raisingListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    posX = event.getX();
+                    posY = event.getY();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    if (!isRaising) break;
+                    curPosX = event.getX();
+                    curPosY = event.getY();
+                    currentHeight -= (curPosY - posY) / 100;
+                    if (currentHeight < 0) currentHeight = 0;
+                    if (currentHeight > HEIGHT - 2f * WIDTH / 3f) {
+                        currentHeight = HEIGHT - 2f * WIDTH / 3f;
+                        isRaising = false;
+                    }
+                    setViewHeight(belowFlag, (int) currentHeight);
+                    break;
+            }
+            return true;
+        }
+    };
     private double score = 0;
-    private final double HEIGHT;
-    private final double WIDTH;
     private int times = 0;
-
     private double totalDelta = 0;
 
     public RaisingMission(MissionController missionController, Data data, View belowFlag, View slideView, TextView prompt, MediaPlayer bgm) {
@@ -78,31 +100,6 @@ public class RaisingMission extends Mission {
             }
         }, new Date(), 10);
     }
-
-    View.OnTouchListener raisingListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    posX = event.getX();
-                    posY = event.getY();
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    if (!isRaising) break;
-                    curPosX = event.getX();
-                    curPosY = event.getY();
-                    currentHeight -= (curPosY - posY) / 100;
-                    if (currentHeight < 0) currentHeight = 0;
-                    if (currentHeight > HEIGHT - 2f * WIDTH / 3f) {
-                        currentHeight = HEIGHT - 2f * WIDTH / 3f;
-                        isRaising = false;
-                    }
-                    setViewHeight(belowFlag, (int) currentHeight);
-                    break;
-            }
-            return true;
-        }
-    };
 
     private void startBgm() {
         bgm.setLooping(false);

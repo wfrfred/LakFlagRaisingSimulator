@@ -1,9 +1,7 @@
 package com.wfrfred.flagraisingceremonysimulator.activity;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,29 +12,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.wfrfred.flagraisingceremonysimulator.R;
 import com.wfrfred.flagraisingceremonysimulator.core.Lak.Lak;
-import com.wfrfred.flagraisingceremonysimulator.core.Lak.LakLecture;
 import com.wfrfred.flagraisingceremonysimulator.core.mission.Data;
 import com.wfrfred.flagraisingceremonysimulator.core.mission.LectureMission;
 import com.wfrfred.flagraisingceremonysimulator.core.mission.MissionController;
 import com.wfrfred.flagraisingceremonysimulator.core.mission.RaisingMission;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.net.URL;
-
 public class CoreActivity extends AppCompatActivity {
+    private static boolean mode = false;
+    private static Bitmap lakBody = null;
     private final String[] strings = {
             "本日的升旗仪式由高二五班主持\n我是主持人LAK",
             "全体同学面向国际旗\n奏唱国际歌,行注目礼",
             "向上滑动以升旗，注意不要滑动过快哦"
     };
+    private final Data preData = new Data();
+    private final Data flag = new Data();
     private View flagCloth;
     private View flagPlot;
     private View belowFlag;
     private Lak lak;
-
     private LinearLayout lakContainer;
     private LinearLayout sky;
     private LinearLayout lectureLayout;
@@ -44,18 +38,19 @@ public class CoreActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
     private TextView text;
     private TextView prompt;
-
     private MissionController controller;
-    private final Data preData = new Data();
-    private final Data flag = new Data();
     private LectureMission preRaising;
     private RaisingMission raisingMission;
     private LectureMission afterRaising;
-
-    private static boolean mode = false;
-    private static Bitmap lakBody = null;
-
     private boolean isInit = false;
+
+    public static void setMode(boolean mode) {
+        CoreActivity.mode = mode;
+    }
+
+    public static void setLakPicture(Bitmap lakBody) {
+        CoreActivity.lakBody = lakBody;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +64,7 @@ public class CoreActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (!isInit) {
-            if(lakBody != null)lak.changeBody(lakBody);
+            if (lakBody != null) lak.changeBody(lakBody);
             lak.invalidate();
             initMission();
             controller.add(preRaising);
@@ -115,14 +110,6 @@ public class CoreActivity extends AppCompatActivity {
         preRaising = new LectureMission(controller, preData, text, lectureLayout);
         raisingMission = new RaisingMission(controller, flag, belowFlag, sky, prompt, mediaPlayer);
         afterRaising = new LectureMission(controller, null, text, lectureLayout);
-    }
-
-    public static void setMode(boolean mode){
-        CoreActivity.mode = mode;
-    }
-
-    public static void setLakPicture(Bitmap lakBody){
-        CoreActivity.lakBody = lakBody;
     }
 
 }

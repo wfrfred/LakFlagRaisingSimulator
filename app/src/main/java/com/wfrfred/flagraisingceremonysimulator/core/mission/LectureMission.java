@@ -16,6 +16,19 @@ public class LectureMission extends Mission {
     private final LinearLayout lectureLayout;
     private final Vector<String> strings = new Vector<>();
     private int index = 0;
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (index < strings.size() - 1) {
+                index++;
+                textView.post(() -> textView.setText(strings.get(index)));
+            } else {
+                textView.post(() -> textView.setOnClickListener(null));
+                lectureLayout.post(() -> lectureLayout.setVisibility(View.GONE));
+                missionController.nextMission(null);
+            }
+        }
+    };
 
     /**
      * @param data     要求name为序数的string数组
@@ -38,18 +51,4 @@ public class LectureMission extends Mission {
             textView.setText(strings.get(index));
         });
     }
-
-    View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (index < strings.size() - 1) {
-                index++;
-                textView.post(() -> textView.setText(strings.get(index)));
-            } else {
-                textView.post(() -> textView.setOnClickListener(null));
-                lectureLayout.post(() -> lectureLayout.setVisibility(View.GONE));
-                missionController.nextMission(null);
-            }
-        }
-    };
 }

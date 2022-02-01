@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffefebe7"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <RelativeLayout
+            android:id="@+id/top_relative"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:background="#106184">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="10.0dip"
+                android:singleLine="true"
+                android:text="设置"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+        </RelativeLayout>
+        <!--
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadingEdge="none">
+
+            <Spinner
+                android:id="@+id/selectedOption"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            </Spinner>
+        </ScrollView>
+        -->
+        <Button
+            android:id="@+id/select_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="选择你的LAK身体"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="50dp"
+            android:gravity="center">
+        </Button>
+
+        <Button
+            android:id="@+id/start_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="50dp"
+            android:gravity="center"
+            android:text="开始游戏">
+        </Button>
+
+        <com.wfrfred.flagraisingceremonysimulator.core.Lak.Lak
+            android:id="@+id/demo"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

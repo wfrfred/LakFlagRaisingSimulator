@@ -1,6 +1,9 @@
 package com.wfrfred.flagraisingceremonysimulator.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +14,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.wfrfred.flagraisingceremonysimulator.R;
 import com.wfrfred.flagraisingceremonysimulator.core.Lak.Lak;
+import com.wfrfred.flagraisingceremonysimulator.core.Lak.LakLecture;
 import com.wfrfred.flagraisingceremonysimulator.core.mission.Data;
 import com.wfrfred.flagraisingceremonysimulator.core.mission.LectureMission;
 import com.wfrfred.flagraisingceremonysimulator.core.mission.MissionController;
 import com.wfrfred.flagraisingceremonysimulator.core.mission.RaisingMission;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class CoreActivity extends AppCompatActivity {
     private final String[] strings = {
@@ -25,7 +35,7 @@ public class CoreActivity extends AppCompatActivity {
     private View flagCloth;
     private View flagPlot;
     private View belowFlag;
-    private View lak;
+    private Lak lak;
 
     private LinearLayout lakContainer;
     private LinearLayout sky;
@@ -36,13 +46,15 @@ public class CoreActivity extends AppCompatActivity {
     private TextView prompt;
 
     private MissionController controller;
-    private Data preData = new Data();
-    private Data flag = new Data();
+    private final Data preData = new Data();
+    private final Data flag = new Data();
     private LectureMission preRaising;
     private RaisingMission raisingMission;
     private LectureMission afterRaising;
 
-    private int mode = 0;
+    private static boolean mode = false;
+    private static Bitmap lakBody = null;
+
     private boolean isInit = false;
 
     @Override
@@ -50,7 +62,6 @@ public class CoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mediaPlayer = MediaPlayer.create(this, R.raw.internationale);
         setContentView(R.layout.activity_core);
-        mode = getIntent().getIntExtra("mode", 0);
         bind();
     }
 
@@ -58,6 +69,8 @@ public class CoreActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (!isInit) {
+            if(lakBody != null)lak.changeBody(lakBody);
+            lak.invalidate();
             initMission();
             controller.add(preRaising);
             controller.add(raisingMission);
@@ -80,10 +93,12 @@ public class CoreActivity extends AppCompatActivity {
     }
 
     private void egg() {
-        if (mode == 1) {
+        if (mode) {
             ViewGroup.LayoutParams lp = flagCloth.getLayoutParams();
             flagContainer.removeView(flagCloth);
-            flagCloth = new Lak(this);
+            Lak tmp = new Lak(this);
+            tmp.changeBody(lakBody);
+            flagCloth = tmp;
             flagContainer.addView(flagCloth, 0, lp);
             lakContainer.removeView(lak);
         }
@@ -102,5 +117,12 @@ public class CoreActivity extends AppCompatActivity {
         afterRaising = new LectureMission(controller, null, text, lectureLayout);
     }
 
+    public static void setMode(boolean mode){
+        CoreActivity.mode = mode;
+    }
+
+    public static void setLakPicture(Bitmap lakBody){
+        CoreActivity.lakBody = lakBody;
+    }
 
 }

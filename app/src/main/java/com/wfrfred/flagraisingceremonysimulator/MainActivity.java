@@ -3,6 +3,7 @@ package com.wfrfred.flagraisingceremonysimulator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -11,24 +12,24 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.wfrfred.flagraisingceremonysimulator.activity.CoreActivity;
+import com.wfrfred.flagraisingceremonysimulator.activity.PrefActivity;
 
 public class MainActivity extends AppCompatActivity {
     TextView lak;
     TextView title;
-    int mode = 0;//彩蛋 默认为0 触发为1
     private Intent intent;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        intent = new Intent(MainActivity.this, CoreActivity.class);
+        //intent = new Intent(MainActivity.this, CoreActivity.class);
+        intent = new Intent(MainActivity.this, PrefActivity.class);
         setContentView(R.layout.activity_start);
         bind();
         setChangeListener();
         LinearLayout start = findViewById(R.id.start);
         start.setOnTouchListener((view, motionEvent) -> {
-            intent.putExtra("mode", mode);//传递给core是否触发彩蛋
             startActivity(intent);
             return true;
         });//点击任意处继续
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     if (Math.abs(target[0] - currentX) <= 50 & Math.abs(target[1] - currentY) <= 50) {
                         lak.setText(R.string.title_01);
                         title.setText(R.string.acknowledgement_01);
-                        mode = 1;//传递给core
+                        CoreActivity.setMode(true);
                     }
                 }
                 return true;

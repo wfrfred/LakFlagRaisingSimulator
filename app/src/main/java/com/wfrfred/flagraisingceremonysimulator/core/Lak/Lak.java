@@ -1,20 +1,27 @@
 package com.wfrfred.flagraisingceremonysimulator.core.Lak;
 
 import android.annotation.SuppressLint;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
 import com.wfrfred.flagraisingceremonysimulator.R;
 
+import java.io.FileNotFoundException;
+
 public class Lak extends View {
+    private static final String TAG = "picture";
+    private int height,weight;
     private Bitmap head;
     private Bitmap body;
 
@@ -22,18 +29,24 @@ public class Lak extends View {
         super(context);
         head = BitmapFactory.decodeResource(getResources(), R.drawable.lak_head);
         body = BitmapFactory.decodeResource(getResources(), R.drawable.body00);
+        height = body.getHeight();
+        weight = body.getWidth();
     }
 
     public Lak(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         head = BitmapFactory.decodeResource(getResources(), R.drawable.lak_head);
         body = BitmapFactory.decodeResource(getResources(), R.drawable.body00);
+        height = body.getHeight();
+        weight = body.getWidth();
     }
 
     public Lak(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         head = BitmapFactory.decodeResource(getResources(), R.drawable.lak_head);
         body = BitmapFactory.decodeResource(getResources(), R.drawable.body00);
+        height = body.getHeight();
+        weight = body.getWidth();
     }
 
     @SuppressLint("DrawAllocation")
@@ -66,7 +79,10 @@ public class Lak extends View {
 
         }
         return null;
+    }
 
+    public void changeBody(Bitmap bitmap){
+        body = Bitmap.createScaledBitmap(bitmap,weight,height,true);
     }
 
 }

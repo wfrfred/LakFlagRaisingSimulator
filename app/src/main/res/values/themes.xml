@@ -13,5 +13,15 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="MainStyle" parent="Theme.AppCompat.Light.NoActionBar"/>
+
+    <style name="MainStyle" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="Theme.FlagRaisingCeremonySimulator.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.FlagRaisingCeremonySimulator.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.FlagRaisingCeremonySimulator.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
